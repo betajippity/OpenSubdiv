@@ -31,6 +31,8 @@
 // This is deprecated functionality.
 #include <tbb/task_scheduler_init.h>
 #endif
+#define TBB_PREVIEW_GLOBAL_CONTROL true
+#include <tbb/global_control.h>
 
 namespace OpenSubdiv {
 namespace OPENSUBDIV_VERSION {
@@ -221,12 +223,11 @@ TbbEvaluator::Synchronize(void *) {
 void
 TbbEvaluator::SetNumThreads(int numThreads) {
 #if defined(TBB_INTERFACE_VERSION_MAJOR) && (TBB_INTERFACE_VERSION_MAJOR < 12)
-    // This is deprecated functionality. We preserve the existing behavior
-    // for consistency (when using older versions of tbb).
-    if (numThreads == -1) {
-        tbb::task_scheduler_init init;
-    } else {
-        tbb::task_scheduler_init init(numThreads);
+    if (numThreads != -1) {
+		tbb::global_control tbb_global_control(
+			tbb::global_control::max_allowed_parallelism,
+			numThreads
+		);
     }
 #endif
 }
