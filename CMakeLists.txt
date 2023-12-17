@@ -312,7 +312,7 @@ add_definitions(${OSD_COMPILER_FLAGS})
 # reloading of the generated Visual Studio project).
 set(CMAKE_SUPPRESS_REGENERATION TRUE)
 
-option(PTEX_LOCATION "Path to Ptex" "")
+set(PTEX_LOCATION "" CACHE STRING "Path to PTEX")
 option(GLEW_LOCATION "Path to GLEW" "")
 option(GLFW_LOCATION "Path to GLFW" "")
 
