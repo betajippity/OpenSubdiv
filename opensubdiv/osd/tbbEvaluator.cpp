@@ -222,14 +222,14 @@ TbbEvaluator::Synchronize(void *) {
 /* static */
 void
 TbbEvaluator::SetNumThreads(int numThreads) {
-#if defined(TBB_INTERFACE_VERSION_MAJOR) && (TBB_INTERFACE_VERSION_MAJOR < 12)
+// #if defined(TBB_INTERFACE_VERSION_MAJOR) && (TBB_INTERFACE_VERSION_MAJOR < 12)
     if (numThreads != -1) {
 		tbb::global_control tbb_global_control(
 			tbb::global_control::max_allowed_parallelism,
 			numThreads
 		);
     }
-#endif
+// #endif
 }
 
 }  // end namespace Osd
