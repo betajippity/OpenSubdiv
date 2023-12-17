@@ -35,7 +35,7 @@ if (WIN32)
         NAMES
             Ptexture.h
         HINTS
-            "${PTEX_LOCATION}/include"
+            "${PTEX_LOCATION}/include/ptex"
             "$ENV{PTEX_LOCATION}/include"
         PATHS
             "$ENV{PROGRAMFILES}/Ptex/include"
@@ -59,7 +59,7 @@ elseif (APPLE)
         NAMES
             Ptexture.h
         HINTS
-            "${PTEX_LOCATION}/include"
+            "${PTEX_LOCATION}/include/ptex"
             "$ENV{PTEX_LOCATION}/include"
         PATHS
             DOC "The directory where Ptexture.h resides")
@@ -86,7 +86,7 @@ else ()
         NAMES
             Ptexture.h
         HINTS
-            "${PTEX_LOCATION}/include"
+            "${PTEX_LOCATION}/include/ptex"
             "${PTEX_LOCATION}/include/wdas"
             "$ENV{PTEX_LOCATION}/include"
             "$ENV{PTEX_LOCATION}/include/wdas"
@@ -112,10 +112,14 @@ else ()
             DOC "The Ptex library")
 endif ()
 
-if (PTEX_INCLUDE_DIR AND EXISTS "${PTEX_INCLUDE_DIR}/PtexVersion.h")
-    set (PTEX_VERSION_FILE "${PTEX_INCLUDE_DIR}/PtexVersion.h")
-elseif (PTEX_INCLUDE_DIR AND EXISTS "${PTEX_INCLUDE_DIR}/Ptexture.h")    
-    set (PTEX_VERSION_FILE "${PTEX_INCLUDE_DIR}/Ptexture.h")
+if (PTEX_INCLUDE_DIR AND EXISTS "${PTEX_INCLUDE_DIR}/ptex/PtexVersion.h")
+    set (PTEX_VERSION_FILE "${PTEX_INCLUDE_DIR}/ptex/PtexVersion.h")
+elseif (PTEX_INCLUDE_DIR AND EXISTS "${PTEX_INCLUDE_DIR}/ptex/Ptexture.h")    
+    set (PTEX_VERSION_FILE "${PTEX_INCLUDE_DIR}/ptex/Ptexture.h")
+endif()
+
+if (PTEX_INCLUDE_DIR)
+    set (PTEX_INCLUDE_DIR "${PTEX_INCLUDE_DIR}/ptex")
 endif()
 
 if (PTEX_VERSION_FILE)
